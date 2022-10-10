@@ -1,11 +1,8 @@
-package me.oms.vcm.dto
+package org.example.dto
 
-import com.fasterxml.jackson.databind.ser.Serializers.Base
-import me.oms.order.enum.OrderSide
-import me.oms.order.enum.OrderType
+import me.oms.vcm.dto.*
 import net.openhft.chronicle.wire.Base64LongConverter
 import net.openhft.chronicle.wire.LongConversion
-import software.chronicle.services.api.dto.AbstractEvent
 
 abstract class ExecutionReport : AbstractEvent<ExecutionReport>() {
     abstract var executionType: ExecutionType
@@ -42,14 +39,14 @@ abstract class ExecutionReport : AbstractEvent<ExecutionReport>() {
             return RejectedExecutionReport().apply { props(nos) }
         }
 
-        fun new(nos: NewOrderSingle, exchOrdId: CharSequence): ExecutionReport{
+        fun new(nos: NewOrderSingle, exchOrdId: CharSequence): ExecutionReport {
             return QueuedExecutionReport().apply {
                 props(nos)
                 this.exchOrdId = Base64LongConverter.INSTANCE.parse(exchOrdId)
             }
         }
 
-        fun replaced(nos: OrderCancelReplaceRequest): ExecutionReport{
+        fun replaced(nos: OrderCancelReplaceRequest): ExecutionReport {
             return ReplacedExecutionReport().apply {
                 props(nos)
             }

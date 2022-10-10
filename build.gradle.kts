@@ -11,8 +11,18 @@ repositories {
     mavenCentral()
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
 dependencies {
     testImplementation(kotlin("test"))
+    implementation(platform("net.openhft:chronicle-bom:2.23ea68"))
+    implementation(platform("net.openhft:third-party-bom:3.19.1"))
+    implementation("net.openhft:affinity")
+    implementation("net.openhft:chronicle-queue")
+    implementation("net.openhft:chronicle-map")
+    implementation("net.openhft:jlbh")
 }
 
 tasks.test {
@@ -20,5 +30,5 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "17"
 }

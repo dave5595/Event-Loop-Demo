@@ -1,4 +1,4 @@
-package me.oms.vcm.dto
+package org.example.dto
 
 class FilledExecutionReport: ExecutionReport(){
     override var executionType: ExecutionType = ExecutionType.Trade

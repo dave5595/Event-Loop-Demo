@@ -1,7 +1,6 @@
-package me.oms.vcm.service
+package me.oms.vcm.service.org.example
 
-import me.oms.vcm.message.AccountEventListener
-import me.oms.vcm.message.OrderRequestListener
-
+import org.example.message.AccountEventListener
+import org.example.message.OrderRequestListener
 
 interface RiskServiceOut : OrderRequestListener, AccountEventListener

@@ -1,10 +1,6 @@
-package me.oms.vcm.dto
+package org.example.dto
 
-import me.oms.order.dto.out.NewOrderSingle
-import me.oms.order.enum.*
-import me.oms.order.query.OrderEntity
 import net.openhft.chronicle.wire.*
-import software.chronicle.services.api.dto.AbstractEvent
 
 class OrderCreated : AbstractEvent<OrderCreated>() {
     var orderId: Long = 0

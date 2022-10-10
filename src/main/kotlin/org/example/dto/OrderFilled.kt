@@ -1,6 +1,4 @@
-package me.oms.vcm.dto
-
-import software.chronicle.services.api.dto.AbstractEvent
+package org.example.dto
 
 class OrderFilled : AbstractEvent<OrderFilled>(){
     lateinit var order: Order

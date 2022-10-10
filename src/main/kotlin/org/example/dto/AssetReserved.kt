@@ -1,9 +1,7 @@
-package me.oms.vcm.dto
+package org.example.dto
 
-import me.oms.order.enum.OrderSide
 import net.openhft.chronicle.wire.Base64LongConverter
 import net.openhft.chronicle.wire.LongConversion
-import software.chronicle.services.api.dto.AbstractEvent
 
 class AssetReserved : AbstractEvent<AssetReserved>() {
     @LongConversion(Base64LongConverter::class)

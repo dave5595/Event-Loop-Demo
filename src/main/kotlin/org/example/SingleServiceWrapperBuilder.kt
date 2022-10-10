@@ -1,7 +1,5 @@
-package me.oms.core.service.wrapper
+package org.example
 
-import me.oms.core.es.SnapshotTriggerDefinition
-import me.oms.core.service.Service
 import net.openhft.chronicle.bytes.MethodReader
 import net.openhft.chronicle.core.io.Closeable
 import net.openhft.chronicle.core.threads.EventLoop
@@ -15,10 +13,10 @@ import java.util.*
 import kotlin.collections.ArrayList
 import java.util.function.Function
 
-class SingleServiceWrapperBuilder<O, T : Service> : ServiceWrapper.SingleBuilder<O, T> {
+class SingleServiceWrapperBuilder<O> : ServiceWrapper.Builder<O> {
     private val inputPaths: MutableList<String> = ArrayList()
 
-    override lateinit var serviceFunction: Function<O, T>
+    override lateinit var serviceFunction: Function<O, Any>
     private lateinit var outputPath: String
     private lateinit var outClass: Class<O>
     private var eventLoop: EventLoop? = null
@@ -26,21 +24,18 @@ class SingleServiceWrapperBuilder<O, T : Service> : ServiceWrapper.SingleBuilder
     private var createdEventLoop = false
     private var inputSourceId = 0
     private var outputSourceId = 0
-    private var periodicUpdateMS: Long? = null
-    private var periodicUpdateMSInitial: Long = 0
-    private var snapshotTriggerDefinitionCfg: SnapshotTriggerDefinition.Config? = null
     private val queues: MutableList<ChronicleQueue> = ArrayList()
 
     override fun inputPath(): List<String> {
         return inputPaths
     }
 
-    override fun addInputPath(inputPath: String): ServiceWrapper.SingleBuilder<O, T> {
+    override fun addInputPath(inputPath: String): ServiceWrapper.Builder<O> {
         inputPaths.add(inputPath)
         return this
     }
 
-    override fun addInputPaths(inputPaths: List<String>): ServiceWrapper.SingleBuilder<O, T> {
+    override fun addInputPaths(inputPaths: List<String>): ServiceWrapper.Builder<O> {
         this.inputPaths.addAll(inputPaths)
         return this
     }
@@ -49,7 +44,7 @@ class SingleServiceWrapperBuilder<O, T : Service> : ServiceWrapper.SingleBuilder
         return outClass
     }
 
-    override fun outClass(outClass: Class<O>): ServiceWrapper.SingleBuilder<O, T> {
+    override fun outClass(outClass: Class<O>): ServiceWrapper.Builder<O> {
         this.outClass = outClass
         return this
     }
@@ -58,7 +53,7 @@ class SingleServiceWrapperBuilder<O, T : Service> : ServiceWrapper.SingleBuilder
         return outputPath
     }
 
-    override fun outputPath(outputPath: String): ServiceWrapper.SingleBuilder<O, T> {
+    override fun outputPath(outputPath: String): ServiceWrapper.Builder<O> {
         this.outputPath = outputPath
         return this
     }
@@ -75,7 +70,7 @@ class SingleServiceWrapperBuilder<O, T : Service> : ServiceWrapper.SingleBuilder
         return priority
     }
 
-    override fun priority(priority: HandlerPriority): ServiceWrapper.SingleBuilder<O, T> {
+    override fun priority(priority: HandlerPriority): ServiceWrapper.Builder<O> {
         this.priority = priority
         return this
     }
@@ -84,48 +79,17 @@ class SingleServiceWrapperBuilder<O, T : Service> : ServiceWrapper.SingleBuilder
         return inputSourceId
     }
 
-    override fun inputSourceId(inputSourceId: Int): ServiceWrapper.SingleBuilder<O, T> {
+    override fun inputSourceId(inputSourceId: Int): ServiceWrapper.Builder<O> {
         this.inputSourceId = inputSourceId
         return this
     }
 
-    override fun registerSnapshotTriggerDefinitionCfg(snapshotTriggerDefinitionCfg: SnapshotTriggerDefinition.Config?): ServiceWrapper.SingleBuilder<O, T> {
-        this.snapshotTriggerDefinitionCfg = snapshotTriggerDefinitionCfg
-        return this
-    }
-
-    override fun registerSnapshotTriggerDefinitionCfg(): SnapshotTriggerDefinition.Config? {
-        return snapshotTriggerDefinitionCfg
-    }
-
-
-    override fun periodicUpdateMSInitial(): Long {
-        return periodicUpdateMSInitial
-    }
-
-    override fun periodicUpdateMSInitial(periodicUpdateMSInitial: Long): ServiceWrapper.SingleBuilder<O, T> {
-        this.periodicUpdateMSInitial = periodicUpdateMSInitial
-        return this
-    }
-
-    override fun periodicUpdateMS(
-        periodicUpdateMS: Long,
-        periodicUpdateMSInitial: Long?
-    ): ServiceWrapper.SingleBuilder<O, T> {
-        this.periodicUpdateMS = periodicUpdateMS
-        this.periodicUpdateMSInitial = periodicUpdateMSInitial ?: 0
-        return this
-    }
-
-    override fun periodicUpdateMS(): Long? {
-        return periodicUpdateMS
-    }
 
     override fun outputSourceId(): Int {
         return outputSourceId
     }
 
-    override fun outputSourceId(outputSourceId: Int): ServiceWrapper.SingleBuilder<O, T> {
+    override fun outputSourceId(outputSourceId: Int): ServiceWrapper.Builder<O> {
         this.outputSourceId = outputSourceId
         return this
     }
@@ -195,13 +159,14 @@ class SingleServiceWrapperBuilder<O, T : Service> : ServiceWrapper.SingleBuilder
     }
 
     companion object {
-        fun <O, T : Service> serviceBuilder(
+
+        fun <O> serviceBuilder(
             inputPath: String,
             outputPath: String,
             outClass: Class<O>,
-            serviceFunction: Function<O, T>
-        ): ServiceWrapper.SingleBuilder<O, T> {
-            val swb: SingleServiceWrapperBuilder<O, T> = SingleServiceWrapperBuilder()
+            serviceFunction: Function<O, Any>
+        ): ServiceWrapper.Builder<O> {
+            val swb: SingleServiceWrapperBuilder<O> = SingleServiceWrapperBuilder()
             swb.addInputPath(inputPath)
             swb.outputPath = outputPath
             swb.outClass = outClass
@@ -209,13 +174,13 @@ class SingleServiceWrapperBuilder<O, T : Service> : ServiceWrapper.SingleBuilder
             return swb
         }
 
-        fun <O, T : Service> serviceBuilder(
+        fun <O> serviceBuilder(
             inputPaths: List<String>,
             outputPath: String,
             outClass: Class<O>,
-            serviceFunction: Function<O, T>
-        ): ServiceWrapper.SingleBuilder<O, T> {
-            val swb: SingleServiceWrapperBuilder<O, T> = SingleServiceWrapperBuilder()
+            serviceFunction: Function<O, Any>
+        ): ServiceWrapper.Builder<O> {
+            val swb: SingleServiceWrapperBuilder<O> = SingleServiceWrapperBuilder()
             swb.addInputPaths(inputPaths)
             swb.outputPath = outputPath
             swb.outClass = outClass

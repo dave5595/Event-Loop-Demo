@@ -1,7 +1,7 @@
-package me.oms.vcm.message
+package org.example.message
 
-import me.oms.vcm.dto.CreateAccount
-import me.oms.vcm.dto.DepositAsset
+import org.example.dto.CreateAccount
+import org.example.dto.DepositAsset
 
 
 interface AccountCommandListener{

@@ -1,8 +1,8 @@
-package me.oms.vcm.dto
+package org.example.dto
 
 import net.openhft.chronicle.wire.Base64LongConverter
 import net.openhft.chronicle.wire.LongConversion
-import software.chronicle.services.api.dto.AbstractEvent
+
 
 class DepositAsset : AbstractEvent<DepositAsset>() {
     @LongConversion(Base64LongConverter::class)

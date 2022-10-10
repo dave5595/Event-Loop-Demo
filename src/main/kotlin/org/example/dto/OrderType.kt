@@ -1,8 +1,7 @@
-package me.oms.order.enum
+package org.example.dto
 
-import com.fasterxml.jackson.annotation.JsonValue
 
-enum class OrderType(/*@get: JsonValue */val type: String) {
+enum class OrderType(val type: String) {
     Market("1"),
     Limit("2"),
     StopLoss("3"),

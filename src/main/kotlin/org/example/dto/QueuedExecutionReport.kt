@@ -1,4 +1,4 @@
-package me.oms.vcm.dto
+package org.example.dto
 
 class QueuedExecutionReport: ExecutionReport(){
     override var executionType: ExecutionType = ExecutionType.New

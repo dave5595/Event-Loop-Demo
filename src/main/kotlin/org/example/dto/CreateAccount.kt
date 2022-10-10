@@ -1,5 +1,3 @@
-package me.oms.vcm.dto
-
-import software.chronicle.services.api.dto.AbstractEvent
+package org.example.dto
 
 class CreateAccount(val accountId: Long): AbstractEvent<CreateAccount>()

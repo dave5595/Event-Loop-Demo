@@ -1,7 +1,7 @@
-package me.oms.vcm.message
+package org.example.message
 
-import me.oms.vcm.dto.NewOrderSingle
-import me.oms.vcm.dto.OrderCancelReplaceRequest
+import org.example.dto.NewOrderSingle
+import org.example.dto.OrderCancelReplaceRequest
 
 
 interface ExchangeOrderListener{

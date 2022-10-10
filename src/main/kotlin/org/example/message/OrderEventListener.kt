@@ -1,6 +1,6 @@
-package me.oms.vcm.message
+package org.example.message
 
-import me.oms.vcm.dto.*
+import org.example.dto.*
 
 interface OrderEventListener{
     fun orderCreated(created: OrderCreated)

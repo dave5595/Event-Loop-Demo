@@ -1,9 +1,5 @@
-package me.oms.vcm.dto
+package org.example.dto
 
-import me.oms.order.enum.OrderSide
-import me.oms.order.enum.OrderState
-import me.oms.order.enum.OrderType
-import me.oms.vcm.FormatUtil
 import net.openhft.chronicle.bytes.MappedUniqueTimeProvider
 import net.openhft.chronicle.wire.Base64LongConverter
 import net.openhft.chronicle.wire.LongConversion
@@ -28,7 +24,7 @@ class Order : SelfDescribingMarshallable() {
     lateinit var type: OrderType
     lateinit var state: OrderState
     var timestamp = MappedUniqueTimeProvider.INSTANCE.currentTimeMicros()
-    val amount get() = me.oms.vcm.FormatUtil.threeDecimalPoints(price.times(quantity))
+    val amount get() = price.times(quantity)
     val isWorking get() = state == OrderState.Working || state == OrderState.PartialFilled
 
     fun fill() = apply {

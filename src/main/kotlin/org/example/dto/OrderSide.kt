@@ -1,6 +1,5 @@
-package me.oms.order.enum
+package org.example.dto
 
-import com.fasterxml.jackson.annotation.JsonValue
 import javax.naming.OperationNotSupportedException
 
 enum class OrderSide(/*@get: JsonValue */val side: String) {
@@ -19,7 +18,7 @@ enum class OrderSide(/*@get: JsonValue */val side: String) {
         }
     }
 
-    fun inverse(): OrderSide{
+    fun inverse(): OrderSide {
         return when(this){
             Bid -> Ask
             Ask -> Bid

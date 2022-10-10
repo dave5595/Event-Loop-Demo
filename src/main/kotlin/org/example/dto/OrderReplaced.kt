@@ -1,6 +1,4 @@
-package me.oms.vcm.dto
-
-import software.chronicle.services.api.dto.AbstractEvent
+package org.example.dto
 
 class OrderReplaced : AbstractEvent<OrderReplaced>(){
     var oldPrice: Double = 0.0

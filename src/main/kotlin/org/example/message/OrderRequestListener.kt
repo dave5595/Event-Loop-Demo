@@ -1,10 +1,9 @@
-package me.oms.vcm.message
+package org.example.message
 
-import me.oms.vcm.dto.NewOrderRequest
-import me.oms.vcm.dto.ReplaceOrderRequest
+import org.example.dto.NewOrderRequest
+import org.example.dto.ReplaceOrderRequest
 
 
 interface OrderRequestListener {
     fun newOrderRequest(request: NewOrderRequest)
-    fun replaceOrderRequest(request: ReplaceOrderRequest)
 }

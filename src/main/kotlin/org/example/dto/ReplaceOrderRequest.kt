@@ -1,9 +1,7 @@
-package me.oms.vcm.dto
+package org.example.dto
 
-import me.oms.vcm.FormatUtil
 import net.openhft.chronicle.wire.Base64LongConverter
 import net.openhft.chronicle.wire.LongConversion
-import software.chronicle.services.api.dto.AbstractEvent
 
 class ReplaceOrderRequest : AbstractEvent<ReplaceOrderRequest>() {
     var orderId: Long = 0
@@ -12,7 +10,7 @@ class ReplaceOrderRequest : AbstractEvent<ReplaceOrderRequest>() {
     var quantity: Double = 0.0
     @LongConversion(Base64LongConverter::class)
     var accountId: Long = 0
-    val amount get() = me.oms.vcm.FormatUtil.threeDecimalPoints(price.times(quantity))
+    val amount get() = price.times(quantity)
 
     companion object {
         private val request = ReplaceOrderRequest()

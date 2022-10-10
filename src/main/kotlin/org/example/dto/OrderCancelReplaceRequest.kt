@@ -1,10 +1,7 @@
-package me.oms.vcm.dto
+package org.example.dto
 
-import me.oms.order.enum.OrderSide
-import me.oms.order.enum.OrderType
 import net.openhft.chronicle.wire.Base64LongConverter
 import net.openhft.chronicle.wire.LongConversion
-import software.chronicle.services.api.dto.AbstractEvent
 
 class OrderCancelReplaceRequest : AbstractEvent<OrderCancelReplaceRequest>() {
     var clOrdId: Long = 0

@@ -1,8 +1,7 @@
-package me.oms.order.enum
+package org.example.dto
 
-import com.fasterxml.jackson.annotation.JsonValue
 
-enum class OrderAction(@get:JsonValue val action: String) {
+enum class OrderAction(val action: String) {
     New("new"), Cancel("cancel"), Revise("replace");
 
     companion object {

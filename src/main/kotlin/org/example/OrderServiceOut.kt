@@ -1,6 +1,6 @@
-package me.oms.vcm.service
+package org.example
 
-import me.oms.vcm.message.ExchangeOrderListener
-import me.oms.vcm.message.OrderEventListener
+import org.example.message.ExchangeOrderListener
+import org.example.message.OrderEventListener
 
 interface OrderServiceOut: OrderEventListener, ExchangeOrderListener

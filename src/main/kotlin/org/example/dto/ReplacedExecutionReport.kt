@@ -1,4 +1,4 @@
-package me.oms.vcm.dto
+package org.example.dto
 
 class ReplacedExecutionReport : ExecutionReport(){
     override var executionType: ExecutionType = ExecutionType.Replaced

@@ -1,9 +1,9 @@
-package me.oms.vcm.service
+package org.example
 
-import me.oms.vcm.message.ExecutionReportListener
-import me.oms.vcm.message.OrderRequestListener
+import org.example.message.ExecutionReportListener
+import org.example.message.OrderRequestListener
 
-interface OrderServiceIn : OrderRequestListener, ExecutionReportListener
+interface OrderServiceIn : OrderRequestListener
 
 
 

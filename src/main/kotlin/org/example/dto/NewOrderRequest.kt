@@ -1,11 +1,7 @@
-package me.oms.vcm.dto
+package org.example.dto
 
-import me.oms.order.enum.OrderSide
-import me.oms.order.enum.OrderType
-import me.oms.vcm.FormatUtil
 import net.openhft.chronicle.wire.Base64LongConverter
 import net.openhft.chronicle.wire.LongConversion
-import software.chronicle.services.api.dto.AbstractEvent
 
 class NewOrderRequest : AbstractEvent<NewOrderRequest>() {
     var extOrdId: Long = 0
@@ -22,7 +18,7 @@ class NewOrderRequest : AbstractEvent<NewOrderRequest>() {
     var currency: Long = 0
     var side: OrderSide = OrderSide.Bid
     var type: OrderType = OrderType.Limit
-    val amount get() = me.oms.vcm.FormatUtil.threeDecimalPoints(price.times(quantity))
+    val amount get() = price.times(quantity)
 
     companion object {
         private val request = NewOrderRequest()

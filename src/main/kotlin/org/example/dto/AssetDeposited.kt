@@ -1,8 +1,7 @@
-package me.oms.vcm.dto
+package org.example.dto
 
 import net.openhft.chronicle.wire.Base64LongConverter
 import net.openhft.chronicle.wire.LongConversion
-import software.chronicle.services.api.dto.AbstractEvent
 
 class AssetDeposited : AbstractEvent<AssetDeposited>(){
     @LongConversion(Base64LongConverter::class)
@@ -13,7 +12,7 @@ class AssetDeposited : AbstractEvent<AssetDeposited>(){
     lateinit var asset: Account.Asset
 
     companion object{
-        fun build(accountId: Long, asset: Account.Asset, deposited: Double ): AssetDeposited{
+        fun build(accountId: Long, asset: Account.Asset, deposited: Double ): AssetDeposited {
             return AssetDeposited().apply {
                 this.accountId = accountId
                 this.symbol = asset.symbol

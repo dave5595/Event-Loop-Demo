@@ -1,6 +1,6 @@
-package me.oms.vcm.message
+package org.example.message
 
-import me.oms.vcm.dto.ExecutionReport
+import org.example.dto.ExecutionReport
 
 
 interface ExecutionReportListener {
